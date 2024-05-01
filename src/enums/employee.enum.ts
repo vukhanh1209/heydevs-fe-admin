@@ -1,0 +1,13 @@
+export enum EMPLOYEE_STATUS {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  DEACTIVATED = "DEACTIVATED",
+  BANNED = "BANNED",
+  ONLINE = "ONLINE",
+  OFFLINE = "OFFLINE",
+}
+
+export enum GENDER {
+  MALE,
+  FEMALE,
+}
