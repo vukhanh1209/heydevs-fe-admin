@@ -3,9 +3,9 @@ import "style/index.scss";
 import type { Metadata } from "next";
 import { Lexend_Deca } from "next/font/google";
 import ToastMessage from "@/components/AlertMessage/ToastMessage";
-import { Providers } from "@/components/Provider";
+import { Providers } from "@/providers/Provider";
 import { StoreProvider } from "@/redux/StoreProvider";
-import TanstackQueryProvider from "@/components/TanstackQueryProvider";
+import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
 
 const lexend = Lexend_Deca({ subsets: ["vietnamese"] });
 
@@ -22,12 +22,6 @@ export default function RootLayout({
 }) {
   return (
     <StoreProvider>
-      {/* <html lang="vi">
-        <body className={lexend.className}>
-          <Providers>{children}</Providers>
-          <ToastMessage />
-        </body>
-      </html> */}
       <html lang="vi">
         <body suppressHydrationWarning={true} className={lexend.className}>
           <TanstackQueryProvider>

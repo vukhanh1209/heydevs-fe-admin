@@ -32,6 +32,7 @@ export default function Pagination({
     <div className="flex justify-center w-full z-40">
       <PaginationNextUI
         showControls
+        hidden={total === 0}
         total={total}
         initialPage={page}
         onChange={handleChange}

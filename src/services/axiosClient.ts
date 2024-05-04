@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { LocalStorage } from "@/utils/localStorage";
 import { notifyWarning } from "@/utils/notification";
+import { deleteCookie, getCookie } from "@/utils/cookie.helper";
+import { TOKEN } from "@/const/auth.constant";
 
 const defaultHeader = {
   "Access-Control-Allow-Origin": "*",
@@ -35,7 +36,7 @@ const axiosClient = axios.create({
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   (config) => {
-    const token = LocalStorage.getAccessToken();
+    const token = getCookie(TOKEN);
     if (token) {
       config.headers["Authorization"] = "Bearer " + token;
     }
@@ -134,12 +135,11 @@ const handleResponse = (res: AxiosResponse) => {
 };
 
 const handleError = (error: AxiosError) => {
-  console.log("Log ~ handleError ~ error:", error);
   return error?.response?.data;
 };
 
 const clearAuthToken = () => {
-  LocalStorage.clearToken();
+  deleteCookie(TOKEN);
 };
 
 export default axiosClient;

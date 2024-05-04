@@ -1,4 +1,5 @@
 export const PATH = {
+  ADMIN: "/admin",
   SIGN_IN: {
     _: "/",
     get() {
@@ -6,7 +7,7 @@ export const PATH = {
     },
   },
   RECRUITER: {
-    _: "/recruiter",
+    _: "/admin/recruiter",
     get() {
       return this._;
     },
@@ -15,7 +16,7 @@ export const PATH = {
     },
   },
   EMPLOYEE: {
-    _: "/employee",
+    _: "/admin/employee",
     get() {
       return this._;
     },
@@ -24,7 +25,7 @@ export const PATH = {
     },
   },
   JOBS: {
-    _: "/jobs",
+    _: "/admin/jobs",
     APPLICATIONS: "/applications",
     get() {
       return this._;
@@ -40,7 +41,7 @@ export const PATH = {
     },
   },
   REGISTRATION: {
-    _: "/registration-form",
+    _: "/admin/registration-form",
     get() {
       return this._;
     },

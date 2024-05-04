@@ -9,7 +9,9 @@ import { useAppDispatch } from "@/redux/hook";
 import { authSignIn } from "@/redux/actions/auth.action";
 import { PATH } from "@/const/path.const";
 import { useEffect } from "react";
-import { LocalStorage } from "@/utils/localStorage";
+import { deleteCookie, getCookie } from "@/utils/cookie.helper";
+import { AUTH_STATUS, UNAUTHORIZED } from "@/const/auth.constant";
+import { notifyErrors, notifyWarning } from "@/utils/notification";
 
 const schema = yup.object().shape({
   password: yup.string().required("Bạn chưa nhập mật khẩu"),
@@ -41,9 +43,9 @@ const SignInForm = () => {
   };
 
   useEffect(() => {
-    const auth = !!LocalStorage.getAccessToken();
-    if (auth) {
-      return redirect(PATH.JOBS.get());
+    if (getCookie(AUTH_STATUS) === UNAUTHORIZED) {
+      notifyWarning("Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại");
+      deleteCookie(AUTH_STATUS);
     }
   }, []);
 
