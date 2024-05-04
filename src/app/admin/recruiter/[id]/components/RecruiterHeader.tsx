@@ -70,7 +70,7 @@ const RecruiterHeader = ({
           <h2 className="text-2xl lg:text-3xl font-bold pb-2 text-center lg:text-left text-rich-grey">
             {companyName}
           </h2>
-          <div className="flex flex-col gap-3 text-rich-grey text-sm font-normal lg:font-medium">
+          <div className="flex flex-col gap-3 text-rich-grey text-base font-normal lg:font-medium">
             <div className="flex gap-2 items-center  ">
               <Image src={LocationPin} width={16} height={16} alt="location" />
               {address}

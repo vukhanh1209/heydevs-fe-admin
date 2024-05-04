@@ -4,9 +4,13 @@ import { PATH } from "./const/path.const";
 import { AUTH_STATUS, TOKEN, UNAUTHORIZED } from "./const/auth.constant";
 
 export function middleware(request: NextRequest) {
-  const isHasToken = request.cookies.get(TOKEN);
+  const token = request.cookies.get(TOKEN);
 
-  if (!isHasToken && request.nextUrl.pathname.startsWith(PATH.ADMIN)) {
+  if (token && request.nextUrl.pathname === PATH.SIGN_IN.get()) {
+    return NextResponse.redirect(new URL(PATH.JOBS.get(), request.url));
+  }
+
+  if (!token && request.nextUrl.pathname.startsWith(PATH.ADMIN)) {
     const response = NextResponse.redirect(
       new URL(PATH.SIGN_IN.get(), request.url)
     );

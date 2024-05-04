@@ -1,11 +1,7 @@
-// import { RECRUITER_STATUS, RECRUITER_TYPE } from "@/enums/recruiter.enum";
+"use client";
 import { getRecruiterDetail } from "@/services/api/recruiter.api";
-// import { RecruiterRES } from "@/services/recruiter/recruiter.respone";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-// import Image from "next/image";
-// import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-// import CompanyAvatar from "@/images/search/companyAvatar.png";
 import RecruiterHeader from "./RecruiterHeader";
 import Information from "./Information";
 import Overview from "./Overview";

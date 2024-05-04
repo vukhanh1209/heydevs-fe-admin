@@ -1,5 +1,6 @@
 export const PATH = {
   ADMIN: "/admin",
+
   SIGN_IN: {
     _: "/",
     get() {
