@@ -22,44 +22,41 @@ const data = {
   ],
 };
 
-export default function KeySkills() {
+type Skill = {
+  id: number;
+  title: string;
+};
+
+type KeySkillsProps = {
+  skills: Skill[];
+  description: string;
+};
+
+export default function KeySkills({ skills, description }: KeySkillsProps) {
   return (
     <div className="divide-y divide-dashed divide-silver-grey bg-white w-full rounded-lg border border-silver-grey text-rich-grey px-6 pt-6 pb-8">
       <h1 className="text-xl lg:text-2xl text-primary-black pb-4 font-bold">
         Chuyên môn của chúng tôi
       </h1>
       <div className="flex flex-col gap-4 pt-4 w-full">
-        {renderKeySkills(data.skills)}
-        {renderSkillContent(data.content)}
+        {renderKeySkills(skills)}
+        <div dangerouslySetInnerHTML={{ __html: description }}></div>
       </div>
     </div>
   );
 }
 
-const renderKeySkills = (skillList: any) => {
+const renderKeySkills = (skillList: Skill[]) => {
   return (
     <div className="flex flex-wrap items-center gap-4">
-      {skillList.map((skill: string, index: number) => (
+      {skillList.map((item: Skill) => (
         <Link
-          key={index}
+          key={item.id}
           href="/"
           className="flex items-center py-1 px-[10px] h-full text-xs rounded-full bg-white text-rich-grey border border-silver-grey hover:border-rich-grey"
         >
-          {skill}
+          {item.title}
         </Link>
-      ))}
-    </div>
-  );
-};
-
-const renderSkillContent = (skillContent: any) => {
-  return (
-    <div>
-      {skillContent.map((item: any, index: number) => (
-        <div key={index} className="text-primary-black leading-7">
-          <h5 className="font-bold ">{item.title}</h5>
-          <p className="">{item.des}</p>
-        </div>
       ))}
     </div>
   );

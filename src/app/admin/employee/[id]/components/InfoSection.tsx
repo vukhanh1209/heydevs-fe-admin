@@ -16,7 +16,7 @@ type InfoSectionProps = {
     birthdate: string;
     address: string;
     phoneNumber: string;
-    gender: GENDER;
+    gender: keyof typeof GENDER;
     avatar: string;
   };
 };
@@ -82,7 +82,7 @@ export default function InfoSection({
             </div>
             <div className="flex gap-2 items-center">
               <Image src={Profile} width={16} height={16} alt="profile" />
-              <span>{gender}</span>
+              <span>{GENDER[gender]}</span>
             </div>
           </div>
         </div>

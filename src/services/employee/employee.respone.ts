@@ -30,7 +30,7 @@ export type UserProfileRES = {
   linkWebsiteProfile: string;
   skills: string[];
   city: string;
-  gender: GENDER;
+  gender: keyof typeof GENDER;
   education: CandidateEducationRES;
   experience: CandidateExperienceRES[];
   avatar: string;

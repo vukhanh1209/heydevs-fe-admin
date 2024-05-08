@@ -8,3 +8,8 @@ export enum RECRUITER_TYPE {
   ADVANCED = "ADVANCED",
   PREMIUM = "PREMIUM",
 }
+
+export enum COMPANY_TYPE {
+  Product = "Sản phẩm",
+  Outsourcing = "Outsourcing",
+}

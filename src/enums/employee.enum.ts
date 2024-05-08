@@ -8,6 +8,6 @@ export enum EMPLOYEE_STATUS {
 }
 
 export enum GENDER {
-  MALE,
-  FEMALE,
+  MALE = "Nam",
+  FEMALE = "Nữ",
 }

@@ -1,4 +1,8 @@
-import { RECRUITER_STATUS, RECRUITER_TYPE } from "@/enums/recruiter.enum";
+import {
+  COMPANY_TYPE,
+  RECRUITER_STATUS,
+  RECRUITER_TYPE,
+} from "@/enums/recruiter.enum";
 
 export type RecruiterRES = {
   recruiterId: number;
@@ -19,4 +23,14 @@ export type RecruiterRES = {
   birthDate: string;
   nickname: string;
   type: RECRUITER_TYPE;
+  country: string;
+  companyType: keyof typeof COMPANY_TYPE;
+  workingFrom: string;
+  workingTo: string;
+  companyLogo: string;
+  companyKeySkills: {
+    id: number;
+    title: string;
+  }[];
+  techDescription: string;
 };

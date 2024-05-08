@@ -59,28 +59,12 @@ export default function RecruiterDetail({ id }: { id: number }) {
   return (
     <section className="w-full flex flex-col py-10 px-6">
       <div className="flex items-start justify-between  py-8">
-        {/* <div className={`flex gap-8 items-center w-full `}>
-          <Image
-            src={CompanyAvatar}
-            width={40}
-            height={40}
-            alt={DUMMY_DATA.companyName}
-            className="h-28 w-28 aspect-square object-cover rounded-md"
-          />
-          <div className="flex flex-col text-rich-grey text-lg">
-            <h5 className="text-primary-black font-semibold text-2xl mb-1">
-              {DUMMY_DATA.companyName}
-            </h5>
-            <span>{DUMMY_DATA.username}</span>
-            <span>{DUMMY_DATA.companyAddress}</span>
-            <span>{DUMMY_DATA.phoneNumber}</span>
-          </div>
-        </div> */}
         <RecruiterHeader
           companyName={data?.companyName || ""}
           address={data?.companyAddress || ""}
           username={data?.username || ""}
           phoneNumber={data?.phoneNumber || ""}
+          companyLogo={data?.companyLogo || ""}
         />
 
         {/* <div className="relative group text-base">
@@ -105,20 +89,29 @@ export default function RecruiterDetail({ id }: { id: number }) {
           </ul>
         </div> */}
       </div>
-      <section className=" flex flex-col gap-6 col-span-full lg:col-span-8">
-        <Information
-          overtimePolicy={data?.overTimePolicy || ""}
-          minCompanySize={data?.minCompanySize || 0}
-          maxCompanySize={data?.maxCompanySize || 0}
-        />
-        <Overview
-          description={data?.introduction || ""}
-          website={data?.websiteUrl || ""}
-        />
-        <KeySkills />
-        <RecruitmentProcedure data={data?.recruitmentProcedure || ""} />
-        <Benefits data={data?.benefit || ""} />
-      </section>
+      {data && (
+        <section className=" flex flex-col gap-6 col-span-full lg:col-span-8">
+          <Information
+            overtimePolicy={data.overTimePolicy}
+            minCompanySize={data.minCompanySize}
+            maxCompanySize={data.maxCompanySize}
+            country={data.country}
+            type={data.companyType}
+            workingFrom={data.workingFrom}
+            workingTo={data.workingTo}
+          />
+          <Overview
+            description={data?.introduction || ""}
+            website={data?.websiteUrl || ""}
+          />
+          <KeySkills
+            skills={data.companyKeySkills}
+            description={data.techDescription}
+          />
+          <RecruitmentProcedure data={data?.recruitmentProcedure || ""} />
+          <Benefits data={data?.benefit || ""} />
+        </section>
+      )}
 
       {/* <div className="flex justify-center pb-10 mt-5">
         <button
