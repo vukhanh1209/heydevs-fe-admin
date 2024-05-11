@@ -20,3 +20,4 @@ export const GET_APPLICATIONS_BY_JOB = "get-all-application-by-job";
 export const GET_APPLICATION_DETAIL = "get-application-detail";
 
 export const GET_REGISTRATION_LIST = "get-all-recruiter-in-active";
+export const SEND_ACCOUNT_TO_RECRUITER = "send-email-to-recruiter";
