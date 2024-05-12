@@ -1,66 +1,64 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 
 import InfoSection from "./InfoSection";
-import { EMPLOYEE_STATUS, GENDER } from "@/enums/employee.enum";
-import { getEmployeeDetail } from "@/services/api/employee.api";
+import { EMPLOYEE_STATUS } from "@/enums/employee.enum";
+import {
+  changeEmployeeStatus,
+  getEmployeeDetail,
+} from "@/services/api/employee.api";
 import IntroSection from "./IntroSection";
 import EduSection from "./EduSection";
 import SkillsSection from "./SkillSection";
 import { getUserProfileDTO } from "@/services/employee/employee.service";
 import ModalConfirm from "@/components/ModalConfirm";
+import { notifyErrors, notifySuccess } from "@/utils/notification";
+import { useRouter } from "next/navigation";
+import { PATH } from "@/const/path.const";
 
-const DUMMY_DATA = {
-  id: 1,
-  aboutMe: "Hello I'm...",
-  fullName: "Nguyen Hong Vu Khanh",
-  email: "nghvukhanh@gmail.com",
-  location: "48 Ung Van Khiem, Binh Thanh Dicstrict, Ho Chi Minh City",
-  address: "48 Ung Van Khiem, Binh Thanh Dicstrict, Ho Chi Minh City",
-  position: "Frontend Engineer",
-  phoneNumber: "0986354614",
-  birthdate: "12/09/2001",
-  linkWebsiteProfile: "facebook.com",
-  skills: ["HTML", "CSS", "ReactJS", "NextJS", "Docker", "CI/CD"],
-  city: "Ho Chi Minh City",
-  gender: GENDER.MALE,
-  education: {
-    id: 1,
-    major: "Software Engineer",
-    school: "HCMUTE",
-    startDate: "2019",
-    endDate: "2024",
+const DATA = {
+  [EMPLOYEE_STATUS.ACTIVE]: {
+    notification: "Khóa tài khoản ứng viên thành công",
+    buttonTitle: "Khóa tài khoản",
+    modalTitle: "Người dùng sẽ không thể đăng nhập sau khi tài khoản bị khóa",
   },
-  experience: [
-    {
-      id: 1,
-      companyName: "Esol Labs",
-      jobTitle: "Frontend Developer",
-      startTime: "07/2023",
-      endTime: "12/2023",
-    },
-    {
-      id: 2,
-      companyName: "WALA ICT",
-      jobTitle: "Frontend Engineer",
-      startTime: "12/2023",
-      endTime: "--",
-    },
-  ],
-  avatar: "",
-  userStatus: EMPLOYEE_STATUS.ACTIVE,
+  [EMPLOYEE_STATUS.INACTIVE]: {
+    notification: "Kích hoạt tài khoản ứng viên thành công",
+    buttonTitle: "Mở tài khoản",
+    modalTitle: "Kích hoạt tài khoản cho ứng viên",
+  },
 };
 
 export default function EmployeeDetail({ id }: { id: string }) {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
+  const router = useRouter();
   const { isLoading, data } = useQuery({
     queryKey: ["employee-detail", id],
     queryFn: () => getEmployeeDetail(id),
     select: getUserProfileDTO,
     placeholderData: keepPreviousData,
     refetchOnWindowFocus: false,
+  });
+
+  const { isPending, mutate: changeAccountStatus } = useMutation({
+    mutationKey: ["change-employee-status"],
+    mutationFn: () =>
+      changeEmployeeStatus({
+        userId: Number(id),
+        status:
+          data?.userStatus === EMPLOYEE_STATUS.ACTIVE
+            ? EMPLOYEE_STATUS.INACTIVE
+            : EMPLOYEE_STATUS.ACTIVE,
+        reason: "",
+      }),
+    onSuccess: () => {
+      data && notifySuccess(DATA[data.userStatus].notification);
+      router.replace(PATH.EMPLOYEE.get());
+    },
+    onError: () => {
+      notifyErrors("Đã xảy ra lỗi");
+    },
   });
 
   if (isLoading) {
@@ -112,16 +110,19 @@ export default function EmployeeDetail({ id }: { id: string }) {
             onClick={() => setIsOpenModal(true)}
             className="text-white bg-primary-red text-base font-medium lg:text-lg py-3 px-8 rounded-lg hover:bg-dark-red w-fit transition-all"
           >
-            Khóa tài khoản
+            {data && DATA[data.userStatus].buttonTitle}
           </button>
         </div>
       </section>
-      <ModalConfirm
-        isOpen={isOpenModal}
-        onClose={() => setIsOpenModal(false)}
-        title="Người dùng sẽ không thể đăng nhập sau khi tài khoản bị khóa"
-        onSubmit={() => setIsOpenModal(false)}
-      />
+      {data && (
+        <ModalConfirm
+          isOpen={isOpenModal}
+          onClose={() => setIsOpenModal(false)}
+          title={DATA[data.userStatus].modalTitle}
+          onSubmit={changeAccountStatus}
+          isPending={isPending}
+        />
+      )}
     </>
   );
 }

@@ -1,29 +1,19 @@
 "use client";
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import requiredIcon from "@/images/sign-in/requireIcon.svg";
 import ImageLegacy from "next/legacy/image";
 import LockedEye from "@/images/locked-eye.svg";
 import Eye from "@/images/eye.svg";
+import { useFormContext } from "react-hook-form";
 
-const InputBox = ({
-  title,
-  placeholder,
-  setInputValue,
-  error,
-  register,
-  name,
-  delay,
-  required,
-  type,
-}: any) => {
+const InputBox = ({ title, placeholder, name, delay, required, type }: any) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   const delayClassName = delay ? `delay-${delay}` : "";
-  const [value, setValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const isPasswordInput = useMemo(() => type === "password", [type]);
-
-  const handleChangeInput = useCallback((e: any) => {
-    setValue(String(e.target.value));
-  }, []);
 
   const handleClickShowPassword = useCallback(
     (e: any) => {
@@ -32,17 +22,6 @@ const InputBox = ({
     },
     [showPassword]
   );
-
-  useEffect(() => {
-    if (setInputValue) {
-      const inputTimeout = setTimeout(() => {
-        setInputValue(value);
-      }, 500);
-      return () => {
-        clearTimeout(inputTimeout);
-      };
-    }
-  }, [setInputValue, value]);
 
   return (
     <div
@@ -54,17 +33,17 @@ const InputBox = ({
       </h5>
       <div className="relative flex items-center h-fit">
         <input
-          {...register}
+          {...register(name)}
           type={isPasswordInput && !showPassword ? "password" : "text"}
-          onChange={(e) => handleChangeInput(e)}
           className={`${
-            error ? "border-[#ed1b2f]" : "border-[#dedede]"
+            errors[name] ? "border-[#ed1b2f]" : "border-[#dedede]"
           } text-sm w-full rounded-lg bg-transparent outline-none text-[#121212] placeholder:text-[#656881] py-3 px-4 border`}
           placeholder={placeholder}
           name={name || ""}
         />
         {isPasswordInput && (
           <button
+            type="button"
             onClick={handleClickShowPassword}
             className="absolute right-4 h-full flex items-center"
           >
@@ -75,20 +54,20 @@ const InputBox = ({
             )}
           </button>
         )}
-        <div
+        {/* <div
           className={`${
-            error ? "block" : "hidden"
+            errors[name] ? "block" : "hidden"
           } absolute right-4 h-full flex items-center`}
         >
           <ImageLegacy src={requiredIcon} />
-        </div>
+        </div> */}
       </div>
       <p
         className={`${
-          error ? "opacity-1" : "opacity-0"
+          errors[name] ? "opacity-1" : "opacity-0"
         } text-xs text-[#FF3D54] first-letter:uppercase min-h-[16px] my-1`}
       >
-        {error?.message}
+        {errors[name]?.message as string}
       </p>
     </div>
   );

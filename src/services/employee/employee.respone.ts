@@ -34,5 +34,5 @@ export type UserProfileRES = {
   education: CandidateEducationRES;
   experience: CandidateExperienceRES[];
   avatar: string;
-  userStatus: EMPLOYEE_STATUS;
+  userStatus: EMPLOYEE_STATUS.ACTIVE | EMPLOYEE_STATUS.INACTIVE;
 };

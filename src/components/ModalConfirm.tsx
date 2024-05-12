@@ -6,6 +6,7 @@ type ModalConfirmProps = {
   onSubmit: () => void;
   title: string;
   isOpen: boolean;
+  isPending: boolean;
 };
 
 export default function ModalConfirm({
@@ -13,6 +14,7 @@ export default function ModalConfirm({
   onClose,
   onSubmit,
   title,
+  isPending,
 }: ModalConfirmProps) {
   if (!isOpen) return <></>;
   return (
@@ -37,6 +39,7 @@ export default function ModalConfirm({
 
         <div className="flex justify-center gap-4 py-4 px-8">
           <button
+            disabled={isPending}
             onClick={onSubmit}
             className="text-white bg-primary-red text-base px-4 py-3 md:px-6 rounded-lg hover:bg-dark-red gap-5 w-fit"
           >

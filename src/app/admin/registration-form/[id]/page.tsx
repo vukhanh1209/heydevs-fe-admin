@@ -25,7 +25,7 @@ function RegistrationFormDetailPage({ params }: { params: { id: string } }) {
   const { isPending, mutate: sendAccount } = useMutation({
     mutationKey: ["send-account"],
     mutationFn: (recruiterId: string) => sendAccountToRecruiter(recruiterId),
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       notifySuccess("Gửi email cho nhà tuyển dụng thành công");
       router.replace(PATH.REGISTRATION.get());
     },
@@ -34,13 +34,13 @@ function RegistrationFormDetailPage({ params }: { params: { id: string } }) {
     },
   });
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="w-full h-[calc(100vh-88px)] flex items-center justify-center">
-  //       <ClipLoader color="#ed1b2f" size={50} />
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="w-full h-[calc(100vh-88px)] flex items-center justify-center">
+        <ClipLoader color="#ed1b2f" size={50} />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -50,7 +50,7 @@ function RegistrationFormDetailPage({ params }: { params: { id: string } }) {
             Thông tin đơn đăng ký
           </h1>
           <div className="grid grid-cols-[230px_auto] gap-3 py-6">
-            <div className="w-fit text-base font-medium grid grid-rows-[8] gap-2">
+            <div className="w-fit text-base font-medium grid grid-rows-[8] gap-2 [&>p]:h-6">
               <p>Tên người đăng ký:</p>
               <p>Chức vụ:</p>
               <p>Email:</p>
@@ -60,7 +60,7 @@ function RegistrationFormDetailPage({ params }: { params: { id: string } }) {
               <p>Địa chỉ website:</p>
               <p>Biết đến Heydevs thông qua:</p>
             </div>
-            <div className="w-full text-base grid grid-rows-[8] gap-2">
+            <div className="w-full text-base grid grid-rows-[8] gap-2 [&>p]:h-6">
               <p>{registrationData?.fullName}</p>
               <p>{registrationData?.workTitle}</p>
               <p>{registrationData?.username}</p>
@@ -84,6 +84,7 @@ function RegistrationFormDetailPage({ params }: { params: { id: string } }) {
         onClose={() => setIsOpenModal(false)}
         title="Bạn muốn phê duyệt đơn đăng ký của nhà tuyển dụng?"
         onSubmit={() => sendAccount(params.id)}
+        isPending={isPending}
       />
     </>
   );

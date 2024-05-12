@@ -5,3 +5,9 @@ export type AllUsersREQ = {
   size?: number;
   status: EMPLOYEE_STATUS;
 };
+
+export type ChangeAccountStatusREQ = {
+  userId: number;
+  status: EMPLOYEE_STATUS;
+  reason: string;
+};

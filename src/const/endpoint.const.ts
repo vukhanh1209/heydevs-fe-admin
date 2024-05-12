@@ -5,7 +5,7 @@ export const CHANGE_PASSWORD = "change-password";
 export const GET_ALL_USER = "get-all-user";
 export const GET_USER_BY_ID = "get-user-by-id";
 export const DEACTIVATE_USER = "deActive-user";
-export const ACTIVATE_USER = "active-user";
+export const EMPLOYEE_STATUS = "active-user";
 
 export const GET_ALL_RECRUITER = "get-all-recruiter";
 export const GET_RECRUITER_BY_ID = "get-recruiter-by-id";
@@ -20,4 +20,5 @@ export const GET_APPLICATIONS_BY_JOB = "get-all-application-by-job";
 export const GET_APPLICATION_DETAIL = "get-application-detail";
 
 export const GET_REGISTRATION_LIST = "get-all-recruiter-in-active";
+export const GET_REGISTRATION_DETAIL = "get-recruiter-inActive-by-id";
 export const SEND_ACCOUNT_TO_RECRUITER = "send-email-to-recruiter";

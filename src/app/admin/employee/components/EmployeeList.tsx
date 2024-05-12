@@ -12,7 +12,7 @@ import { getAllEmployees } from "@/services/api/employee.api";
 import { UserProfileRES } from "@/services/employee/employee.respone";
 import EmployeeCard from "./EmployeeCard";
 
-const EMPLOYEE_STATUSES = [EMPLOYEE_STATUS.ACTIVE, EMPLOYEE_STATUS.DEACTIVATED];
+const EMPLOYEE_STATUSES = [EMPLOYEE_STATUS.ACTIVE, EMPLOYEE_STATUS.INACTIVE];
 
 const DUMMY_DATA = Array.from({ length: 5 }).map(() => ({
   id: 1,

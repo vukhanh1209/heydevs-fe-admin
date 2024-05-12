@@ -1,6 +1,7 @@
+import { UserProfileDTO } from "./employee.dto";
 import { UserProfileRES } from "./employee.respone";
 
-export const getUserProfileDTO = (data: UserProfileRES) => ({
+export const getUserProfileDTO = (data: UserProfileRES): UserProfileDTO => ({
   id: data.id,
   info: {
     address: data.address,

@@ -11,7 +11,7 @@ export type UserProfileDTO = {
     birthdate: string;
     email: string;
     fullName: string;
-    gender: GENDER;
+    gender: keyof typeof GENDER;
     phoneNumber: string;
     position: string;
     location: string;
@@ -23,5 +23,5 @@ export type UserProfileDTO = {
   skills: string[];
   education: CandidateEducationRES;
   experience: CandidateExperienceRES[];
-  userStatus: EMPLOYEE_STATUS;
+  userStatus: EMPLOYEE_STATUS.ACTIVE | EMPLOYEE_STATUS.INACTIVE;
 };

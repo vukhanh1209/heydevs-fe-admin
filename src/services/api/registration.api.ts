@@ -1,4 +1,5 @@
 import {
+  GET_REGISTRATION_DETAIL,
   GET_REGISTRATION_LIST,
   SEND_ACCOUNT_TO_RECRUITER,
 } from "@/const/endpoint.const";
@@ -13,7 +14,7 @@ export const getRegistrationList = (
   axiosClient.get(GET_REGISTRATION_LIST, { params });
 
 export const getRegistrationDetail = (id: string): Promise<RegistrationRES> =>
-  axiosClient.get(`${GET_REGISTRATION_LIST}/${id}`);
+  axiosClient.get(`${GET_REGISTRATION_DETAIL}/${id}`);
 
 export const sendAccountToRecruiter = (id: string) =>
   axiosClient.post(`${SEND_ACCOUNT_TO_RECRUITER}/${id}`);
