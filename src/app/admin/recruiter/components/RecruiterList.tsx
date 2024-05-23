@@ -62,7 +62,7 @@ export default function RecruiterList() {
         totalAccount: response.totalElements,
       };
     },
-    placeholderData: keepPreviousData,
+    // placeholderData: keepPreviousData,
     refetchOnWindowFocus: false,
   });
 

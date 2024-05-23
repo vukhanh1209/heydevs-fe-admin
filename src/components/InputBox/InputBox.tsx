@@ -1,6 +1,5 @@
 "use client";
 import { useState, useMemo, useCallback } from "react";
-import requiredIcon from "@/images/sign-in/requireIcon.svg";
 import ImageLegacy from "next/legacy/image";
 import LockedEye from "@/images/locked-eye.svg";
 import Eye from "@/images/eye.svg";

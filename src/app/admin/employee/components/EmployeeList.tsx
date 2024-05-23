@@ -81,7 +81,7 @@ export default function EmployeeList() {
         totalAccount: response.totalElements,
       };
     },
-    placeholderData: keepPreviousData,
+    // placeholderData: keepPreviousData,
     refetchOnWindowFocus: false,
   });
 

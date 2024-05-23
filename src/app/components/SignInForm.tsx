@@ -11,7 +11,7 @@ import { PATH } from "@/const/path.const";
 import { useEffect } from "react";
 import { deleteCookie, getCookie } from "@/utils/cookie.helper";
 import { AUTH_STATUS, UNAUTHORIZED } from "@/const/auth.constant";
-import { notifyErrors, notifyWarning } from "@/utils/notification";
+import { notifyWarning } from "@/utils/notification";
 
 const schema = yup.object().shape({
   password: yup.string().required("Bạn chưa nhập mật khẩu"),

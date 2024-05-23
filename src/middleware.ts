@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get(TOKEN);
 
   if (token && request.nextUrl.pathname === PATH.SIGN_IN.get()) {
-    return NextResponse.redirect(new URL(PATH.JOBS.get(), request.url));
+    return NextResponse.redirect(new URL(PATH.REGISTRATION.get(), request.url));
   }
 
   if (!token && request.nextUrl.pathname.startsWith(PATH.ADMIN)) {

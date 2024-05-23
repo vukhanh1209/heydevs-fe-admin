@@ -1,4 +1,4 @@
-import ApplicationDetail from "./components/ApplicationDetail";
+// import ApplicationDetail from "./components/ApplicationDetail";
 
 function ApplicationDetailPage({
   params,
@@ -7,10 +7,10 @@ function ApplicationDetailPage({
 }) {
   return (
     <main className="flex w-full min-h-screen bg-white px-5 lg:px-[1.875rem] max-w-[1200px]">
-      <ApplicationDetail
+      {/* <ApplicationDetail
         jobId={Number(params.jobId)}
         applicationId={Number(params.applicationId)}
-      />
+      /> */}
     </main>
   );
 }
